@@ -1,0 +1,15 @@
+@import "../../../node_modules/bootstrap/scss/bootstrap.scss";
+
+* {
+  font-family: "Palatino", Helvetica, Serif;
+}
+
+.App {
+    min-height: 100vh;
+}
+
+@import "./utility/variables.scss";
+@import "./components/header.scss";
+@import "./components/top-gradient.scss";
+@import "./components/feed.scss";
+

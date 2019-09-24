@@ -1,0 +1,50 @@
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+.search {
+    margin: 0;
+
+    input {
+        border: 2px solid darkgray;
+        border-radius: 9px;
+        width: 100%;
+        max-width: 550px;
+    }
+
+    input:focus {
+        outline: none;
+        border-color: lightblue;
+    }
+}
+
+.left {
+    width: 45%;
+    margin-left: 10%;
+}
+
+.right {
+    margin-right: 10%;
+}
+
+
+.button {
+    padding: .7em 1.2em;
+    border-radius: 5px;
+}
+
+a:hover, a:focus {
+    text-decoration: none;
+}
+
+.posts {
+    table-layout: fixed;
+    width: 80%;
+
+    tr {
+        background-color: $table-row-color;
+        border-bottom: 1px solid $table-border-color;
+    }
+}

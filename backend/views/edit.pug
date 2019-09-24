@@ -1,0 +1,40 @@
+extends layout.pug
+
+block content
+  include ./cover-photo-background
+
+  .container.py-5
+    header.text-center
+      h1 Edit Post
+
+    include ./submission-error
+
+    form.text-center(action=`/posts/${post.id}/update` method="post")
+      .post-fields.mx-auto.text-left
+        p.my-4
+          label.mx-2(for='title') Title
+          input#title.mx-2.px-4.py-3(name='title' type='text' value=post.title)
+        p.my-4
+          label.mx-2(for='author') Author
+          input#author.mx-2.px-4.py-3(name='author' type='text' value=post.author)
+        p.my-4
+          label.mx-2.align-top(for='lead') Lead
+          textarea#lead.mx-2.p-4(name='lead' rows="4")= post.lead
+        p.my-4
+          label.mx-2(for='coverPhoto') Cover Photo
+          input#coverPhoto.mx-2.px-4.py-3(name='coverPhoto' type='text' value=post.coverPhoto.id)
+        p.my-4
+          label.mx-2.align-top(for='body') Body
+          textarea#body.mx-2.p-4(name='body' rows="16" cols="67")= post.body
+      p.mx-auto
+        input.btn.btn-info.mt-4.px-5(type='submit' value='Update Post')
+
+    form.text-center(method='post' action=`/posts/${post.id}/delete` onsubmit="return confirm('Do you really want to delete this post?');")
+      p.mx-auto
+        input.btn.btn-danger.mt-2.px-5(type='submit' value='Delete Post')
+      p.mx-auto
+        a.btn.btn-secondary.mt-2.pb-2.px-5(href='/posts') Cancel
+  footer.pb-5
+
+  //- if(errors)
+  //-   script(src="/static/scripts/input-handling.js")

@@ -1,0 +1,41 @@
+extends layout.pug
+
+block content
+  header.text-center.my-5
+    h1.my-5 Posts
+  .nav.my-5
+    .left
+      form.search(action=`/posts/page/1` method="get")
+        input.py-2.px-3(type="search" onfocus="this.select();" name="search" placeholder="Search..." value=search)
+    .right.text-right
+      p.new-book.mt-2
+        a.button.bg-info.text-white(href='/posts/new') Create New Post
+        
+  div.content
+    table.table.posts.mx-auto
+      thead.thead-dark
+        tr
+          th 
+            p Title
+          th
+            p Author
+          th
+            p Published
+      tbody
+        each post in posts
+          tr
+            td
+              a(href=`/posts/${post.id}/edit`)= post.title
+            td= post.author
+            td= post.published
+  - var i = 0;
+
+  //- ul.page-list
+  //-   if pageLinks.length > 1
+  //-     while i < pageLinks.length
+  //-       li
+  //-         if (i + 1) === page
+  //-           a(href=pageLinks[i] class="selected")= ++i
+  //-         else
+  //-           a(href=pageLinks[i])= ++i
+
