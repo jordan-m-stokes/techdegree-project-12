@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+import axios from 'axios';
+
 import Card from './pieces/Card';
 import Content from '../res/content';
 
@@ -10,15 +12,38 @@ class Feed extends Component
     constructor(props)
     {
         super(props);
-        this.state = { width: 0, height: 0 };
+        this.state = { width: 0, height: 0, cards: [] };
     }
       
     componentDidMount()
     {
-        this.updateWindowDimensions();
-        window.addEventListener('resize', this.updateWindowDimensions);
+        axios.get('http://localhost:5000/posts/json',
+              {
+                  headers: {
+
+                  }
+              })
+         .then((response) =>
+         {
+            const posts = response.data;
+
+            const cards = posts.map((post) => 
+            {
+                let card = <Card thumbnail={post.coverPhoto.links.large} title={post.title} lead={post.lead}/>;
+                return card;
+            });
+
+            this.setState({cards: cards});
+
+            this.updateWindowDimensions();
+            window.addEventListener('resize', this.updateWindowDimensions);
+         })
+         .catch(function (error)
+         {
+            console.log(error);
+         });
     }
-      
+
     componentWillUnmount()
     {
         window.removeEventListener('resize', this.updateWindowDimensions);
@@ -77,17 +102,7 @@ class Feed extends Component
 	{
 		return (
 			<div className="feed">
-                <Card thumbnail={Thumbnail} title="How to Best Learn Spanish" content={`${Content} ${Content} ${Content}`}/>
-                <Card thumbnail={Thumbnail} title="Deber, Must, Should or to Owe?" content={`${Content}`}/>
-                <Card thumbnail={Thumbnail} title="Learning Language with Music" content={`${Content} ${Content}`}/>
-                <Card thumbnail={Thumbnail} title="Using Duolingo Effectively" content={`${Content} ${Content}`}/>
-                <Card thumbnail={Thumbnail} title="Learning Many-Meaning Words" content={`${Content} ${Content} ${Content}`}/>
-                <Card thumbnail={Thumbnail} title="Spanish, Half-Textbook Half-Speak-It" content={`${Content}`}/><Card thumbnail={Thumbnail} title="How to Best Learn Spanish" content={`${Content} ${Content} ${Content}`}/>
-                <Card thumbnail={Thumbnail} title="Deber, Must, Should or to Owe?" content={`${Content}`}/>
-                <Card thumbnail={Thumbnail} title="Learning Language with Music" content={`${Content} ${Content}`}/>
-                <Card thumbnail={Thumbnail} title="Using Duolingo Effectively" content={`${Content}`}/>
-                <Card thumbnail={Thumbnail} title="Learning Many-Meaning Words" content={`${Content} ${Content} ${Content}`}/>
-                <Card thumbnail={Thumbnail} title="Spanish, Half-Textbook Half-Speak-It" content={`${Content} ${Content}`}/>
+                {this.state.cards}
             </div>
 		);
 	}

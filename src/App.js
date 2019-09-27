@@ -6,6 +6,8 @@ import {
 	Switch
 } from 'react-router-dom';
 
+import axios from 'axios';
+
 import Header from './components/Header';
 import TopGradient from './components/pieces/TopGradient';
 import Feed from './components/Feed';

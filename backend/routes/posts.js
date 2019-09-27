@@ -57,6 +57,21 @@ router.get('/', (request, response) =>
 		});
 });
 
+router.get('/json', (request, response) =>
+{
+	Post.find({})
+		.sort({createdAt: -1})
+		.exec((error, posts) => 
+		{
+			if(error)
+			{
+				error.status = 400;
+				return next(error);
+			}
+			response.json(posts);
+		});
+});
+
 //GET all posts on a page
 router.get('/page/:page', (request, response, next) => 
 {
