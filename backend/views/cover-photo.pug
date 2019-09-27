@@ -1,0 +1,38 @@
+
+img.cover-photo-background(src=post.coverPhoto.links.medium alt="")
+//- img.cover-photo-background(src=post.coverPhoto.links.original alt="" styles='display: none')
+
+
+script.
+    function loadSmoothly()
+    {
+        const largerSrc = "#{post.coverPhoto.links.extraLarge}";
+        const originalSrc = "#{post.coverPhoto.links.original}";
+
+        const element = document.querySelector(".cover-photo-background");
+
+        let image = document.images[0];
+        let largerImage = document.createElement("img");
+        let originalImage = document.createElement("img");
+
+        largerImage.onload = function()
+        {
+            image.src = this.src;
+        };
+
+        originalImage.onload = function()
+        {
+            image.src = this.src;
+
+            element.style.animation = "unblur 0.7s 0.5s forwards";
+        }
+
+        largerImage.src = largerSrc;
+        originalImage.src = originalSrc;
+    }
+
+    loadSmoothly();
+
+
+
+    

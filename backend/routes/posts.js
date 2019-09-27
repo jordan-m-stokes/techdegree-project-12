@@ -47,8 +47,8 @@ router.get('/', (request, response) =>
 			
 			posts = posts.map(post => 
 			{
+				console.log(post);
 				post.published = dateFormatting.formatToString(new Date(post.createdAt));
-				console.log(post.published);
 				return post;
 			});
 
