@@ -26,7 +26,8 @@ h1 {
 }
 
 label {
-    width: 3em;
+    width: 5em;
+    text-align: left;
 }
 
 .btn {
@@ -36,4 +37,24 @@ label {
 p {
     margin-bottom: 0;
     padding-bottom: 1rem;
+}
+
+
+input {
+    width: 300px;
+    border: 2px solid #d1d1d1;
+    border-radius: 8px;
+}
+
+input:focus {
+    outline: none;
+    border-color: lightblue;
+}
+
+.logout {
+    border: none;
+    width: 160px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 16px;
 }

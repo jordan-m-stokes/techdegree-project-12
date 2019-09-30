@@ -6,6 +6,8 @@ const morgan = require('morgan');
 const path = require('path');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
 require('dotenv').config();
 
@@ -41,6 +43,15 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json());
+app.use(session({
+	secret: 'algo que nadie se va a enterar',
+	resave: true,
+	saveUninitialized: false,
+	store: new MongoStore({
+		mongooseConnection: database
+	})
+
+}))
 
 //my middleware
 app.use((request, response, next) => 

@@ -3,7 +3,8 @@
 const Express = require('express');
 
 //middleware
-const pexels = require('../middleware/pexels');
+const getImage = require('../middleware/pexels').getImage;
+const isLoggedIn = require('../middleware/session').isLoggedIn;
 
 //fields
 const router = Express.Router();
@@ -11,29 +12,31 @@ const router = Express.Router();
 const dateFormatting = require('../util/date-formatting'); 
 
 //Mongoose Models
+const Author = require('../models/author');
 const Post = require('../models/post');
 
 //puts the corresponding post for any route that contains the "id" param in the request
-router.param(":id", (request, response, next, id) => 
+router.param("id", (request, response, next, id) => 
 {
-      Post.findById(id)
-            .exec((error, post) => 
-            {
-                if(error)
-                {
-                    return next(error);
-                }
-                if(!post) 
-                {
-                    error = new Error('Not Found');
-                    error.status = 404;
-                    return next(error);
-                }
-                request.post = post;
-                next();
-            });
+	Post.findById(id)
+		.exec((error, post) => 
+		{
+			if(error)
+			{
+				return next(error);
+			}
+			if(!post) 
+			{
+				error = new Error('Not Found');
+				error.status = 404;
+				return next(error);
+			}
+			request.post = post;
+			next();
+		});
 });
-router.get('/', (request, response) => 
+
+router.get('/', isLoggedIn, (request, response, next) => 
 {
 	Post.find({})
 		.sort({createdAt: -1})
@@ -47,7 +50,6 @@ router.get('/', (request, response) =>
 			
 			posts = posts.map(post => 
 			{
-				console.log(post);
 				post.published = dateFormatting.formatToString(new Date(post.createdAt));
 				return post;
 			});
@@ -72,27 +74,27 @@ router.get('/json', (request, response) =>
 		});
 });
 
-//GET all posts on a page
-router.get('/page/:page', (request, response, next) => 
-{
-	response.render('posts');
-});
+// //GET all posts on a page
+// router.get('/page/:page', (request, response, next) => 
+// {
+// 	response.render('posts');
+// });
 
 //GET new book form
-router.get('/new', (request, response, next) => 
+router.get('/new', isLoggedIn, (request, response, next) => 
 {	
 	response.render('new');
 });
 
 //GET individual book for edit
-router.get('/:id/edit', (request, response, next) => 
+router.get('/:id/edit', isLoggedIn, (request, response, next) => 
 {
 	response.locals.post = request.post;
 	response.render('edit');
 });
 
 // POST create post
-router.post('/', pexels.getImage, (request, response, next) =>
+router.post('/', isLoggedIn, getImage, (request, response, next) =>
 {
 	const post = new Post(request.body);
 
@@ -110,7 +112,7 @@ router.post('/', pexels.getImage, (request, response, next) =>
 });
 
 //PUT update article
-router.post("/:id/update", pexels.getImage, (request, response, next) =>
+router.post("/:id/update", isLoggedIn, getImage, (request, response, next) =>
 {
 	request.post.update(request.body, (error, result) => 
 	{
@@ -125,7 +127,7 @@ router.post("/:id/update", pexels.getImage, (request, response, next) =>
 });
 
 /* POST delete article. */
-router.post("/:id/delete", (request, response, next) =>
+router.post("/:id/delete", isLoggedIn, (request, response, next) =>
 {
 	request.post.remove((error) => 
 	{

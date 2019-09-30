@@ -15,6 +15,9 @@
             //filter: blur(3px);
         }
     }
+    img {
+        object-fit: cover;
+    }
 }
 
 @media(max-width: 25rem)

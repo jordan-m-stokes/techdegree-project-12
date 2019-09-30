@@ -70,8 +70,6 @@ class Feed extends Component
 
         }
 
-        console.log(cards[3]);
-
         columns = [];
 
         for(let i = 0; i < totalColumns; i++)

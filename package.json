@@ -4,10 +4,14 @@
   "private": true,
   "dependencies": {
     "axios": "^0.19.0",
+    "basic-auth": "^2.0.1",
+    "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
+    "connect-mongo": "^3.0.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "express-session": "^1.16.2",
     "mongoose": "^5.7.1",
     "morgan": "^1.9.1",
     "pug": "^2.0.4",
@@ -22,6 +26,7 @@
     "frontend-sass": "sass --watch src/styles/sass:src/styles",
     "backend-app": "nodemon ./backend/app.js",
     "backend-sass": "sass --watch backend/sass:backend/public",
+    "add-author": "node ./backend/add-author.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

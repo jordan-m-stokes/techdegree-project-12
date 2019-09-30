@@ -9665,7 +9665,7 @@ h3 {
 }
 @keyframes fade-in {
   from {
-    opacity: 0.7;
+    opacity: 0.6;
   }
   to {
     opacity: 1;
@@ -9675,7 +9675,7 @@ h3 {
   position: absolute;
   object-fit: cover;
   width: 102vw;
-  height: 1750px;
+  height: 1850px;
   top: -1vw;
   left: -1vw;
   z-index: -1;
@@ -9683,7 +9683,7 @@ h3 {
 }
 
 .container {
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.75);
   border-radius: 25px;
   position: relative;
   left: 0;
@@ -9705,10 +9705,6 @@ h3 {
   width: 100%;
   max-width: 550px;
 }
-.search input:focus {
-  outline: none;
-  border-color: lightblue;
-}
 
 .left {
   width: 45%;
@@ -9722,6 +9718,7 @@ h3 {
 .button {
   padding: 0.7em 1.2em;
   border-radius: 5px;
+  font-size: 16px;
 }
 
 a:hover, a:focus {
@@ -9766,7 +9763,8 @@ h1 {
 }
 
 label {
-  width: 3em;
+  width: 5em;
+  text-align: left;
 }
 
 .btn {
@@ -9776,6 +9774,25 @@ label {
 p {
   margin-bottom: 0;
   padding-bottom: 1rem;
+}
+
+input {
+  width: 300px;
+  border: 2px solid #d1d1d1;
+  border-radius: 8px;
+}
+
+input:focus {
+  outline: none;
+  border-color: lightblue;
+}
+
+.logout {
+  border: none;
+  width: 160px;
+  height: 40px;
+  border-radius: 5px;
+  font-size: 16px;
 }
 
 /*# sourceMappingURL=main.css.map */

@@ -1,0 +1,16 @@
+extends layout.pug
+
+block content
+  header.text-center.my-5
+    h1.my-5 Login
+        
+    
+    form.text-center(action="/login" method="post")    
+        p.my-4
+            label.mx-2(for='email') Email
+            input.mx-2.px-3.py-2(name='email' type='text')
+        p.my-4
+            label.mx-2(for='password') Password
+            input.mx-2.px-3.py-2(name='password' type='password')
+        p.mx-auto
+            input.btn.btn-info.mt-4(type='submit' value='Login')
