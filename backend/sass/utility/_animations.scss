@@ -1,7 +1,6 @@
 
 @keyframes unblur {
-    from {filter: blur(50px) }
-    to {filter: blur(0px) }
+    to {filter: blur(0);}
 }
 
 @keyframes fade-in {

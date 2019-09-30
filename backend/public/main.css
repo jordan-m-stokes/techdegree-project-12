@@ -9656,11 +9656,8 @@ h3 {
   }
 }
 @keyframes unblur {
-  from {
-    filter: blur(50px);
-  }
   to {
-    filter: blur(0px);
+    filter: blur(0);
   }
 }
 @keyframes fade-in {
@@ -9672,14 +9669,14 @@ h3 {
   }
 }
 .cover-photo-background {
-  position: absolute;
-  object-fit: cover;
-  width: 102vw;
-  height: 1850px;
-  top: -1vw;
-  left: -1vw;
-  z-index: -1;
   filter: blur(50px);
+}
+.cover-photo-background img {
+  object-fit: cover;
+  position: absolute;
+  width: 100vw;
+  height: 1850px;
+  z-index: -1;
 }
 
 .container {
@@ -9751,7 +9748,6 @@ a:hover, a:focus {
 
 body {
   background-color: #f8f9fa;
-  animation: fade-in 1s;
 }
 
 header {

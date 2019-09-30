@@ -1,13 +1,14 @@
 
 .cover-photo-background {
-    position: absolute;
-    object-fit: cover;
-    width: 102vw;
-    height: 1850px;
-    top: -1vw;
-    left: -1vw;
-    z-index: -1; 
     filter: blur(50px);
+
+    img {
+        object-fit: cover;
+        position: absolute;
+        width: 100vw;
+        height: 1850px;
+        z-index: -1;
+    }
 }
 
 .container {

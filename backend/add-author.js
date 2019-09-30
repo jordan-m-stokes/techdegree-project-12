@@ -23,9 +23,9 @@ database.once("open", () =>
 
 const newAuthor = 
 {
-    name: '',
-    email: '',
-    password: ''
+    name: 'Jordan Stokes',
+    email: 'jordanstokes@clarityspanish.com',
+    password: 'beckyyee'
 }
 
 const Author = require('./models/author');
