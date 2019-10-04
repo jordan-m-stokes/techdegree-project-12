@@ -4,15 +4,15 @@
 
     img {
         object-fit: cover;
-        position: absolute;
+        position: fixed;
         width: 100vw;
         height: 1850px;
-        z-index: -1;
+        z-index: -2;
     }
 }
 
 .container {
-    background: rgba(255,255,255,0.75);
+    background: rgba($background-light, 0.75);
     border-radius: 25px;
     position: relative;
     left: 0;

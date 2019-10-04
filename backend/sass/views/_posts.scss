@@ -43,4 +43,14 @@ a:hover, a:focus {
         background-color: $table-row-color;
         border-bottom: 1px solid $table-border-color;
     }
+    input {
+        width: 300px;
+        border: 2px solid #d1d1d1;
+        border-radius: 8px;
+    }
+
+    input:focus {
+        outline: none;
+        border-color: lightblue;
+    }
 }

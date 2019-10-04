@@ -1,0 +1,14 @@
+#image-search.modal.fade(tabindex='-1' role='dialog' aria-labelledby='image-search-label' aria-hidden='true')
+  .modal-dialog.modal-lg(role='document')
+    .modal-content
+      .modal-header
+        button.close(type='button' data-dismiss='modal' aria-label='Close')
+          span(aria-hidden='true') &times;
+      .modal-body
+        .search.my-4.px-5
+          input.mx-auto.form-control(type='text' placeholder="Search...")
+        #gallery
+
+        #viewer.hidden
+
+include ../js/image-search

@@ -1,31 +1,37 @@
 extends layout.pug
 
 block content
-  include ./cover-photo
+
+  .cover-photo-background
+    img(src="" alt="")
 
   .container.py-5
+
+    include ./js/bootstrap
+    include ./submission-error
+
     header.text-center
       h1 Edit Post
 
-    include ./submission-error
-
     form.text-center(action=`/posts/${post.id}/update` method="post")
       .post-fields.mx-auto.text-left
-        p.my-4
+        #title.field.my-4
           label.mx-2(for='title') Title
-          input#title.mx-2.px-4.py-3(name='title' type='text' value=post.title)
-        p.my-4
+          input.mx-2.px-4.py-3(name='title' type='text' value=post.title)
+        #author.field.my-4
           label.mx-2(for='author') Author
-          input#author.mx-2.px-4.py-3(name='author' type='text' value=post.author)
-        p.my-4
+          input.mx-2.px-4.py-3(name='author' type='text' value=post.author)
+        #lead.field.my-4
           label.mx-2.align-top(for='lead') Lead
-          textarea#lead.mx-2.p-4(name='lead' rows="4")= post.lead
-        p.my-4
-          label.mx-2(for='coverPhoto') Cover Photo
-          input#coverPhoto.mx-2.px-4.py-3(name='coverPhoto' type='text' value=post.coverPhoto.id)
-        p.my-4
+          textarea.mx-2.p-4(name='lead' rows="4")= post.lead
+        #cover-photo.field.my-4
+          label.ml-2(for='coverPhoto') Cover Photo
+          p.my-2.ml-2= post.coverPhoto.title
+          input.hidden(name="coverPhoto" type="text"  value=post.coverPhoto.id)
+          button.btn.btn-info.mb-4.ml-2(type='button' data-toggle='modal' data-target='#image-search') Change
+        #body.field.my-4
           label.mx-2.align-top(for='body') Body
-          textarea#body.mx-2.p-4(name='body' rows="16" cols="67")= post.body
+          textarea.mx-2.p-4(name='body' rows="16")= post.body
       p.mx-auto
         input.btn.btn-info.mt-4.px-5(type='submit' value='Update Post')
 
@@ -34,7 +40,8 @@ block content
         input.btn.btn-danger.mt-2.px-5(type='submit' value='Delete Post')
       p.mx-auto
         a.btn.btn-secondary.mt-2.pb-2.px-5(href='/posts') Cancel
-  footer.pb-5
+
+    include ./cover-photo/image-search
 
   //- if(errors)
   //-   script(src="/static/scripts/input-handling.js")

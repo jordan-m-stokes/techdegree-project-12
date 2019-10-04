@@ -22,6 +22,7 @@ const app = express();
 //route imports 
 const indexRoute = require('./routes');
 const postsRoute = require('./routes/posts');
+const imageSearchRoute = require('./routes/image-search');
 
 //database setup
 database.on('error', console.error.bind(console, 'connection error: '));
@@ -66,6 +67,7 @@ app.use('/static', express.static('backend/public'));
 // route usage
 app.use('/', indexRoute);
 app.use('/posts', postsRoute);
+app.use('/image-search', imageSearchRoute);
 
 // send 404 if no other route matched
 app.use((request, response) =>

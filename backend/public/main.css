@@ -9662,7 +9662,7 @@ h3 {
 }
 @keyframes fade-in {
   from {
-    opacity: 0.6;
+    opacity: 0;
   }
   to {
     opacity: 1;
@@ -9673,14 +9673,14 @@ h3 {
 }
 .cover-photo-background img {
   object-fit: cover;
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 1850px;
-  z-index: -1;
+  z-index: -2;
 }
 
 .container {
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(248, 249, 250, 0.75);
   border-radius: 25px;
   position: relative;
   left: 0;
@@ -9730,6 +9730,15 @@ a:hover, a:focus {
   background-color: #e8e9ea;
   border-bottom: 1px solid #d8d9da;
 }
+.posts input {
+  width: 300px;
+  border: 2px solid #d1d1d1;
+  border-radius: 8px;
+}
+.posts input:focus {
+  outline: none;
+  border-color: lightblue;
+}
 
 .post-fields {
   width: 800px;
@@ -9740,6 +9749,12 @@ a:hover, a:focus {
   width: 700px;
   border: 1px solid #d1d1d1;
   border-radius: 5px;
+}
+.post-fields .field button {
+  display: block;
+}
+.post-fields .field p {
+  color: #17a2b8;
 }
 
 * {
@@ -9759,11 +9774,11 @@ h1 {
 }
 
 label {
-  width: 5em;
+  width: 6em;
   text-align: left;
 }
 
-.btn {
+.btn-thick {
   padding: 0.7em 1em;
 }
 
@@ -9772,15 +9787,8 @@ p {
   padding-bottom: 1rem;
 }
 
-input {
-  width: 300px;
-  border: 2px solid #d1d1d1;
-  border-radius: 8px;
-}
-
-input:focus {
-  outline: none;
-  border-color: lightblue;
+.hidden {
+  display: none;
 }
 
 .logout {
@@ -9789,6 +9797,47 @@ input:focus {
   height: 40px;
   border-radius: 5px;
   font-size: 16px;
+}
+
+#gallery {
+  margin: 45px auto;
+  width: 672px;
+}
+#gallery img {
+  object-fit: cover;
+  border-radius: 5px;
+  margin: 12px;
+}
+#gallery img:hover {
+  opacity: 0.75;
+}
+
+#viewer {
+  margin: 45px auto 20px;
+  width: 672px;
+  max-height: 656px;
+  text-align: center;
+}
+#viewer img {
+  display: block;
+  margin: -40px auto 0;
+  max-width: 672px;
+  max-height: 546px;
+  border-radius: 8px;
+}
+#viewer span {
+  display: block;
+  margin-top: 20px;
+  color: #666;
+  border-bottom: 1px solid #aaa;
+  padding-bottom: 0.6em;
+}
+#viewer button {
+  margin: 1.5em 1.4em;
+}
+
+.modal-header {
+  border: none;
 }
 
 /*# sourceMappingURL=main.css.map */

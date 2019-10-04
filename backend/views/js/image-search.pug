@@ -1,0 +1,161 @@
+include ./axios
+
+//requires html to contain an element with the id "gallery" to function
+
+script.
+    const search = document.querySelector('.search');
+    const searchInput = search.querySelector('input');
+    const gallery = document.querySelector('#gallery');
+    const viewer = document.querySelector('#viewer');
+    const coverPhotoInput = document.querySelector('#cover-photo input');
+    const coverPhotoTitle = document.querySelector('#cover-photo p');
+
+    let galleryData = [];
+
+    let timeout = -1;
+
+    function realizeSearch()
+    {
+        let query = searchInput.value;
+
+        while(query.includes(' '))
+        {
+            query = query.replace(' ', '+');
+        }
+
+        axios({
+            method: 'get',
+            url: `http://localhost:5000/image-search/${query}`,
+            })
+            .then(function (response)
+            {
+                gallery.innerHTML = '';
+
+                galleryData = response.data;
+
+                let value = 0;
+
+                galleryData.forEach(photo => 
+                {
+                    const element = document.createElement('img');
+
+                    element.src = photo.src.large;
+                    element.value = value++;
+                    element.alt = "";
+                    element.width = "200";
+                    element.height = "125";
+
+                    element.addEventListener('click', () => enlargeImage(element));
+
+                    gallery.appendChild(element);
+                });
+            })
+            .catch(error => 
+            {
+                console.log(error);
+            });
+    }
+
+    function setTimeoutSearch()
+    {
+        if(timeout != -1)
+        {
+            clearTimeout(timeout);
+        }
+        timeout = setTimeout(realizeSearch, 600);
+    }
+
+    function enlargeImage(image)
+    {
+        gallery.className += ' hidden';
+        search.className += ' hidden';
+        viewer.className = '';
+        viewer.innerHTML = '';
+
+        const enlargedImage = document.createElement('img');
+        const title = document.createElement('span');
+        const chooseButton = document.createElement('button');
+        const backButton = document.createElement('button');
+
+        enlargedImage.src = galleryData[image.value].src.large2x;
+        enlargedImage.alt = "";
+
+        title.innerHTML = galleryData[image.value].title;
+
+        chooseButton.className = 'btn btn-info';
+        chooseButton.type = 'button';
+        chooseButton.innerHTML = 'Choose';
+        chooseButton.addEventListener('click', () => chooseImage(galleryData[image.value]));
+
+        backButton.className = 'btn btn-info';
+        backButton.type = 'button';
+        backButton.innerHTML = 'Back';
+        backButton.addEventListener('click', returnToSearch);
+
+        viewer.appendChild(enlargedImage);
+        viewer.appendChild(title);
+        viewer.appendChild(chooseButton);
+        viewer.appendChild(backButton);
+    }
+
+    function returnToSearch()
+    {
+        gallery.className = gallery.className.replace(' hidden', '');
+        search.className = search.className.replace(' hidden', '');
+        viewer.className += ' hidden';
+    }
+
+    function updateBackground(src)
+    {
+        const div = document.querySelector(".cover-photo-background");
+        const image = div.querySelector("img");
+        
+        const largerImage = document.createElement("img");
+
+        image.src = src.large;
+        image.alt = "";
+        image.style.opacity = '0';
+        image.style.animation = 'fade-in 1s forwards';
+
+        div.style.filter = 'blur(50px)';
+        div.style.animation = '';
+
+        largerImage.onload = function()
+        {
+            image.src = this.src;
+
+            div.style.animation = "unblur 1.5s 0.5s forwards";
+        }
+
+        largerImage.src = src.original;
+        div.style.display = 'none';
+
+        setTimeout(() => { div.style.display = 'inherit' }, 50);
+    }
+
+
+    function chooseImage(image)
+    {
+        const coverPhotoButton = document.querySelector('#cover-photo button');
+
+        coverPhotoInput.value = image.id;
+        coverPhotoTitle.innerHTML = image.title;
+        coverPhotoButton.innerHTML = 'Change';
+
+        $('#image-search').modal('hide');
+        returnToSearch();
+
+        updateBackground(image.src);
+    }
+
+    searchInput.addEventListener("input", setTimeoutSearch);
+    coverPhotoInput.addEventListener("change", updateBackground);
+
+    let src = #{post.coverPhoto.links};
+
+    if(src)
+    {
+        updateBackground(src);
+    }
+
+    realizeSearch();

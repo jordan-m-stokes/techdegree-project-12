@@ -25,11 +25,11 @@ h1 {
 }
 
 label {
-    width: 5em;
+    width: 6em;
     text-align: left;
 }
 
-.btn {
+.btn-thick {
     padding: 0.7em 1em;
 }
 
@@ -38,16 +38,8 @@ p {
     padding-bottom: 1rem;
 }
 
-
-input {
-    width: 300px;
-    border: 2px solid #d1d1d1;
-    border-radius: 8px;
-}
-
-input:focus {
-    outline: none;
-    border-color: lightblue;
+.hidden {
+    display: none;
 }
 
 .logout {
@@ -57,3 +49,60 @@ input:focus {
     border-radius: 5px;
     font-size: 16px;
 }
+
+$image-width: 200px;
+$image-height: 125px;
+$image-spacing: 12px;
+$images-per-row: 3;
+$images-per-column: 4;
+$container-width: ($image-width * $images-per-row) + ($image-spacing * $images-per-row * 2);
+$container-height: ($image-height * $images-per-column) + ($image-spacing * $images-per-column * 2);
+
+#gallery {
+    //helper variables
+
+    margin: 45px auto;
+    width: $container-width;
+
+    img {
+        object-fit: cover;
+        border-radius: 5px;
+        margin: $image-spacing;
+    }
+
+    img:hover {
+        opacity: 0.75;
+    }
+}
+
+#viewer {
+    margin: 45px auto 20px;
+    width: $container-width;
+    max-height: $container-height + 60px;
+    text-align: center;
+
+    img {
+        display: block;
+        margin: -40px auto 0;
+        max-width: $container-width;
+        max-height: $container-height - 50px;
+        border-radius: 8px;
+    }
+
+    span {
+        display: block;
+        margin-top: 20px;
+        color: #666;
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.6em;
+    }
+
+    button {
+        margin: 1.5em 1.4em;
+    }
+}
+
+.modal-header {
+    border: none;
+}
+

@@ -1,4 +1,5 @@
 const axios = require('axios');
+const toTitleCase = require('@gouch/to-title-case');
 
 function getImage(request, response, next)
 {
@@ -11,6 +12,16 @@ function getImage(request, response, next)
          .then(function (pexelsResponse)
          {
             const imageData = pexelsResponse.data;
+            
+            let title = imageData.url.split('/')[4];
+            title = title.replace(`-${request.body.coverPhoto}`, '');
+
+            while(title.includes('-'))
+            {
+                title = title.replace('-', ' ');
+            }
+
+            title = title.toTitleCase();
 
             request.body.coverPhoto = 
             {
@@ -19,6 +30,7 @@ function getImage(request, response, next)
                     width: imageData.width,
                     height: imageData.height
                 },
+                title: title,
                 links: {
                     original: imageData.src.original,
                     tiny: imageData.src.tiny,

@@ -1,33 +1,45 @@
 extends layout.pug
 
+
 block content
-  header.text-center.my-5
-    h1 New Post
-
+  include ./js/bootstrap
   include ./submission-error
+  
+  .cover-photo-background
+    img(src="" alt="")
+  
+  .container.py-5
+    header.text-center.my-5
+      h1 New Post
 
-  form.text-center(action="/posts" method="post")
-    .post-fields.mx-auto.text-left
-      p.my-4
-        label.mx-2(for='title') Title
-        input.mx-2.px-4.py-3(name='title' type='text')
-      p.my-4
-        label.mx-2(for='author') Author
-        input.mx-2.px-4.py-3(name='author' type='text')
-      p.my-4
-        label.mx-2.align-top(for='lead') Lead
-        textarea.mx-2.p-4(name='lead' rows="4")
-      p.my-4
-        label.mx-2(for='coverPhoto') Cover Photo
-        input.mx-2.px-4.py-3(name='coverPhoto' type='text')
-      p.my-4
-        label.mx-2.align-top(for='body') Body
-        textarea.mx-2.p-4(name='body' rows="16")
+    form.text-center(action="/posts" method="post")
+      .post-fields.mx-auto.text-left
+        #title.field.my-4
+          label.mx-2(for='title') Title
+          input.mx-2.px-4.py-3(name='title' type='text')
+        #author.field.my-4
+          label.mx-2(for='author') Author
+          input.mx-2.px-4.py-3(name='author' type='text')
+        #lead.field.my-4
+          label.mx-2.align-top(for='lead') Lead
+          textarea.mx-2.p-4(name='lead' rows="4")
+        #cover-photo.field.my-4
+          label.ml-2(for='coverPhoto') Cover Photo
+          p.my-2.ml-2 None Choosen
+          input.hidden(name="coverPhoto" type="text")
+          button.btn.btn-info.mb-4.ml-2(type='button' data-toggle='modal' data-target='#image-search') Choose
+        #body.field.my-4
+          label.mx-2.align-top(for='body') Body
+          textarea.mx-2.p-4(name='body' rows="16")
 
-    p.mx-auto
-      input.btn.btn-info.mt-4(type='submit' value='Create New Post')
-    p.mx-auto
-      a.btn.btn-secondary.mt-2(href='/posts') Cancel
+      p.mx-auto
+        input.btn.btn-info.btn-thick.mt-4(type='submit' value='Create New Post')
+      p.mx-auto
+        a.btn.btn-secondary.btn-thick.mt-2(href='/posts') Cancel
+
+      -var post = {coverPhoto: { links: false} }
+      
+  include ./cover-photo/image-search
 
   //- if(errors)
   //-   script(src="/static/scripts/input-handling.js")

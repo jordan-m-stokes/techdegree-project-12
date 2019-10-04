@@ -31,6 +31,10 @@ const PostSchema = new Schema({
                 required: true
             }
         },
+        title: {
+            type: String,
+            required: true
+        },
         links: {
             original: {
                 type: String,
