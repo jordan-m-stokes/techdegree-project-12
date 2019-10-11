@@ -3,14 +3,16 @@ include ./axios
 //requires html to contain an element with the id "gallery" to function
 
 script.
-    const search = document.querySelector('.search');
+    const search = document.querySelector('#search');
     const searchInput = search.querySelector('input');
+    const databaseSelector = search.querySelector('#database-selector');
     const gallery = document.querySelector('#gallery');
     const viewer = document.querySelector('#viewer');
     const coverPhotoInput = document.querySelector('#cover-photo input');
     const coverPhotoTitle = document.querySelector('#cover-photo p');
 
     let galleryData = [];
+    let database = 'pexels';
 
     let timeout = -1;
 
@@ -25,7 +27,7 @@ script.
 
         axios({
             method: 'get',
-            url: `http://localhost:5000/image-search/${query}`,
+            url: `http://localhost:5000/image-search/${query}?database=${database}`,
             })
             .then(function (response)
             {
@@ -39,7 +41,7 @@ script.
                 {
                     const element = document.createElement('img');
 
-                    element.src = photo.src.large;
+                    element.src = photo.src.smaller;
                     element.value = value++;
                     element.alt = "";
                     element.width = "200";
@@ -77,7 +79,7 @@ script.
         const chooseButton = document.createElement('button');
         const backButton = document.createElement('button');
 
-        enlargedImage.src = galleryData[image.value].src.large2x;
+        enlargedImage.src = galleryData[image.value].src.larger;
         enlargedImage.alt = "";
 
         title.innerHTML = galleryData[image.value].title;
@@ -112,7 +114,7 @@ script.
         
         const largerImage = document.createElement("img");
 
-        image.src = src.large;
+        image.src = src.larger;
         image.alt = "";
         image.style.opacity = '0';
         image.style.animation = 'fade-in 1s forwards';
@@ -148,8 +150,26 @@ script.
         updateBackground(image.src);
     }
 
+    function switchDatabase(button)
+    {
+        databaseSelector.querySelectorAll('.btn').forEach(btn => 
+        {
+            btn.className = btn.className.replace(' selected', '');
+        });
+
+        button.className += ' selected';
+        database = button.value;
+
+        realizeSearch();
+    }
+
     searchInput.addEventListener("input", setTimeoutSearch);
     coverPhotoInput.addEventListener("change", updateBackground);
+
+    databaseSelector.querySelectorAll('.btn').forEach(button => 
+    {
+        button.addEventListener('click', () => switchDatabase(button));
+    });
 
     let src = #{post.coverPhoto.links};
 

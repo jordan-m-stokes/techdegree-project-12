@@ -9703,7 +9703,7 @@ header h2 {
 }
 
 .card {
-  width: 375px;
+  width: 280px;
   margin: 0 50px 100px;
   border: 1px solid #f2f2f2;
 }
@@ -9713,7 +9713,7 @@ header h2 {
 
 @media (max-width: 25rem) {
   .card-body {
-    padding: 1.4rem;
+    padding: 0.9rem;
   }
   .card-body p {
     font-size: 0.98rem;
@@ -9721,7 +9721,7 @@ header h2 {
 }
 @media (min-width: 25rem) {
   .card-body {
-    padding: 2rem;
+    padding: 1.2rem;
   }
 }
 @media (max-width: 32rem) {

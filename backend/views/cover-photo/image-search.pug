@@ -5,8 +5,12 @@
         button.close(type='button' data-dismiss='modal' aria-label='Close')
           span(aria-hidden='true') &times;
       .modal-body
-        .search.my-4.px-5
+        #search.my-4.px-5
           input.mx-auto.form-control(type='text' placeholder="Search...")
+          #database-selector.btn-group.mx-auto.mt-5(role='group', aria-label='Database Selection')
+            button.btn.btn-pexels.selected(type='button' value='pexels') Pexels
+            button.btn.btn-unsplash(type='button' value='unsplash') Unsplash
+
         #gallery
 
         #viewer.hidden

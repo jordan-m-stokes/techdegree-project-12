@@ -9778,6 +9778,11 @@ label {
   text-align: left;
 }
 
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 .btn-thick {
   padding: 0.7em 1em;
 }
@@ -9797,6 +9802,23 @@ p {
   height: 40px;
   border-radius: 5px;
   font-size: 16px;
+}
+
+#search #database-selector {
+  display: flex;
+  width: 300px;
+}
+#search .btn-pexels {
+  background-color: #05a081;
+  color: white;
+}
+#search .btn-unsplash {
+  background-color: black;
+  color: white;
+}
+#search .btn:not(.selected) {
+  background: none;
+  color: black;
 }
 
 #gallery {
@@ -9823,7 +9845,7 @@ p {
   margin: -40px auto 0;
   max-width: 672px;
   max-height: 546px;
-  border-radius: 8px;
+  border-radius: 9px;
 }
 #viewer span {
   display: block;

@@ -3,7 +3,7 @@
 const Express = require('express');
 
 //middleware
-const getImage = require('../middleware/pexels').getImage;
+const getImage = require('../middleware/image-retrieval').get;
 const isLoggedIn = require('../middleware/session').isLoggedIn;
 
 //fields

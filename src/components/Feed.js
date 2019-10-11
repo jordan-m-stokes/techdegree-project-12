@@ -3,9 +3,6 @@ import React, {Component} from 'react';
 import axios from 'axios';
 
 import Card from './pieces/Card';
-import Content from '../res/content';
-
-import Thumbnail from "../res/jumbotron-back.jpg";
 
 class Feed extends Component
 {
@@ -53,12 +50,11 @@ class Feed extends Component
     {
         const feed = document.querySelector('.feed');
         const cards = feed.querySelectorAll('.card');
-        const spacePerCard = 475 /* px */
+        const spacePerCard = 360 /* px */
 
         let totalColumns = parseInt(window.innerWidth / spacePerCard * .95);
         let columns = document.querySelectorAll('.column');
 
-        if(totalColumns > 4) totalColumns = 4;
         if(totalColumns < 1) totalColumns = 1;
 
         if(columns.length > 0)
@@ -78,7 +74,7 @@ class Feed extends Component
 
             column.className = 'column';
             column.style.display = 'inline-block';
-            column.style.width  = `${475}px`;
+            column.style.width  = `${spacePerCard}px`;
 
             columns.push(column);
         }
