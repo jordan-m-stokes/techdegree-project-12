@@ -1,9 +1,11 @@
-extends layout.pug
-
+extends ./layouts/main.pug
 
 block content
   include ./js/bootstrap
-  include ./submission-error
+  include ./error/submission
+
+  script. 
+    document.querySelector('.error').style.display = 'none';
   
   .cover-photo-background
     img(src="" alt="")
@@ -39,7 +41,8 @@ block content
 
       -var post = {coverPhoto: { links: false} }
       
-  include ./cover-photo/image-search
+  include ./plugins/image-search
+  include ./js/form-validation
 
   //- if(errors)
   //-   script(src="/static/scripts/input-handling.js")

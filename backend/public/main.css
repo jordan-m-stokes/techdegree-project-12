@@ -9675,7 +9675,7 @@ h3 {
   object-fit: cover;
   position: fixed;
   width: 100vw;
-  height: 1850px;
+  height: 1800px;
   z-index: -2;
 }
 
@@ -9685,7 +9685,7 @@ h3 {
   position: relative;
   left: 0;
   right: 0;
-  top: 15vh;
+  top: 10vh;
 }
 
 .nav {
@@ -9749,6 +9749,7 @@ a:hover, a:focus {
   width: 700px;
   border: 1px solid #d1d1d1;
   border-radius: 5px;
+  outline: none;
 }
 .post-fields .field button {
   display: block;
@@ -9823,6 +9824,7 @@ p {
 
 #gallery {
   margin: 45px auto;
+  height: 596px;
   width: 672px;
 }
 #gallery img {
@@ -9844,7 +9846,7 @@ p {
   display: block;
   margin: -40px auto 0;
   max-width: 672px;
-  max-height: 546px;
+  height: 546px;
   border-radius: 9px;
 }
 #viewer span {
@@ -9858,8 +9860,36 @@ p {
   margin: 1.5em 1.4em;
 }
 
+#image-loading {
+  display: inline-block;
+  position: absolute;
+  top: 172px;
+  left: 0;
+  width: 798px;
+  height: 646px;
+  background: rgba(255, 255, 255, 0.75);
+}
+#image-loading p {
+  text-align: center;
+  margin: 250px auto 0;
+  font-size: 19px;
+}
+
 .modal-header {
   border: none;
+}
+
+.error {
+  display: block;
+  position: sticky;
+  z-index: 3;
+  top: 0;
+  background: #ff4a4a;
+  color: white;
+  text-align: center;
+  font-size: 1.2em;
+  padding: 1em 0;
+  margin: 0;
 }
 
 /*# sourceMappingURL=main.css.map */

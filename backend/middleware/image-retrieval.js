@@ -6,7 +6,7 @@ function getPexelImage(request, response, next)
     axios.get(`https://api.pexels.com/v1/photos/${request.body.coverPhoto}`,
               {
                   headers: {
-                      authorization: "563492ad6f917000010000010addbcc086d04306b585cef35ce83730"
+                      authorization: request.environment.API_KEY_PEXELS
                   }
               })
          .then(function (pexelsResponse)
@@ -53,7 +53,7 @@ function getUnsplashImage(request, response, next)
     axios.get(`https://api.unsplash.com/photos/${request.body.coverPhoto}`,
               {
                   headers: {
-                      authorization: "Client-ID 8361bf4ce9b4c0ad325bc983cc9c60c444245e4a650471aeeb557d0438f58f0e"
+                      authorization: `Client-ID ${request.environment.API_KEY_UNSPLASH}`
                   }
               })
          .then(function (unsplashResponse)

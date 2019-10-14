@@ -1,0 +1,84 @@
+script.   
+    const form = document.querySelector('form');
+    const error = document.querySelector('.error');
+
+    const fields = form.querySelectorAll('.post-fields input, .post-fields textarea');
+
+    error.style.display = 'none';
+
+    let fieldHasEventListener = 
+    [
+        false,
+        false,
+        false,
+        false,
+        false
+    ];
+    let fieldsCorrected = 
+    [
+        true,
+        true,
+        true,
+        true,
+        true
+    ];
+    let bannerHeight = 0;
+
+    form.addEventListener('submit', (event) => 
+    {
+        let isError = false;
+        let scroll = -1;
+
+        for(let i = 0; i < fields.length; i++)
+        {
+            let field = fields[i];
+
+            if(!field.value)
+            {
+                isError = true;
+
+                let toMark = field.className.includes('hidden') ? field.parentNode.querySelector('p') : field;
+
+                if(toMark.nodeName === 'P')
+                {
+                    toMark.innerHTML = 'Please Select Cover Photo...'
+                    toMark.style.color = "#f33";
+                }
+                else
+                {
+                    toMark.style.border = "2px solid #f88";
+
+                    if(!fieldHasEventListener)
+                    {
+                        toMark.addEventListener('keyup', () => 
+                        {
+                            if(!toMark.value)
+                            {
+                                toMark.style.border = "2px solid #f88";
+                            }
+                            else
+                            {
+                                toMark.style.border = '';
+                            }
+                        });
+                        fieldHasEventListener[i] = true;
+                    }
+                }
+
+
+                if(scroll === -1)
+                {
+                    scroll = toMark.getBoundingClientRect().top + window.scrollY - 55 - bannerHeight;
+                }
+            }
+            bannerHeight = 61;
+        }
+
+        if(isError)
+        {
+            event.preventDefault();
+            error.style.display = 'block';
+            window.scrollTo(0, scroll);
+        }
+
+    });

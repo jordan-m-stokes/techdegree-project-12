@@ -8,6 +8,7 @@ script.
     const databaseSelector = search.querySelector('#database-selector');
     const gallery = document.querySelector('#gallery');
     const viewer = document.querySelector('#viewer');
+    const imageLoading = document.querySelector('#image-loading');
     const coverPhotoInput = document.querySelector('#cover-photo input');
     const coverPhotoTitle = document.querySelector('#cover-photo p');
 
@@ -19,6 +20,8 @@ script.
     function realizeSearch()
     {
         let query = searchInput.value;
+
+        imageLoading.style.display = 'inherit';
 
         while(query.includes(' '))
         {
@@ -51,6 +54,8 @@ script.
 
                     gallery.appendChild(element);
                 });
+
+                imageLoading.style.display = 'none';
             })
             .catch(error => 
             {
@@ -142,6 +147,7 @@ script.
 
         coverPhotoInput.value = image.id;
         coverPhotoTitle.innerHTML = image.title;
+        coverPhotoTitle.style.color = "#17a2b8";
         coverPhotoButton.innerHTML = 'Change';
 
         $('#image-search').modal('hide');

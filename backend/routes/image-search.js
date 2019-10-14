@@ -83,7 +83,7 @@ router.get('/', isLoggedIn, (request, response, next) =>
         axios.get(`https://api.unsplash.com/photos?order_by=popular&page=1&per_page=12`,
                 {
                     headers: {
-                        authorization: "Client-ID 8361bf4ce9b4c0ad325bc983cc9c60c444245e4a650471aeeb557d0438f58f0e"
+                        authorization: `Client-ID ${request.environment.API_KEY_UNSPLASH}`
                     }
                 })
             .then(function (unsplashResponse)
@@ -100,7 +100,7 @@ router.get('/', isLoggedIn, (request, response, next) =>
         axios.get(`https://api.pexels.com/v1/curated?per_page=12&page=1`,
                 {
                     headers: {
-                        authorization: "563492ad6f917000010000010addbcc086d04306b585cef35ce83730"
+                        authorization: request.environment.API_KEY_PEXELS
                     }
                 })
             .then(function (pexelsResponse)
@@ -123,7 +123,7 @@ router.get('/:search', isLoggedIn, (request, response, next) =>
         axios.get(`https://api.unsplash.com/search/photos?query=${request.params.search}&page=1&per_page=12`,
                 {
                     headers: {
-                        authorization: "Client-ID 8361bf4ce9b4c0ad325bc983cc9c60c444245e4a650471aeeb557d0438f58f0e"
+                        authorization:  `Client-ID ${request.environment.API_KEY_UNSPLASH}`
                     }
                 })
             .then(function (unsplashResponse)
@@ -140,7 +140,7 @@ router.get('/:search', isLoggedIn, (request, response, next) =>
         axios.get(`https://api.pexels.com/v1/search?query=${request.params.search}&per_page=12&page=1`,
                 {
                     headers: {
-                        authorization: "563492ad6f917000010000010addbcc086d04306b585cef35ce83730"
+                        authorization: request.environment.API_KEY_PEXELS
                     }
                 })
             .then(function (pexelsResponse)

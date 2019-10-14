@@ -12,7 +12,7 @@ const MongoStore = require('connect-mongo')(session);
 require('dotenv').config();
 
 //connect to mongoose
-mongoose.connect('mongodb://localhost:27017/clarity-spanish', { useNewUrlParser: true, useCreateIndex: true });
+mongoose.connect(process.env.DATABASE || 'mongodb://localhost:27017/clarity-spanish', { useNewUrlParser: true, useCreateIndex: true });
 
 //fields
 const database = mongoose.connection;
@@ -45,7 +45,7 @@ app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json());
 app.use(session({
-	secret: 'algo que nadie se va a enterar',
+	secret: 'algo que nadie se vaya a enterar',
 	resave: true,
 	saveUninitialized: false,
 	store: new MongoStore({
@@ -58,6 +58,8 @@ app.use(session({
 app.use((request, response, next) => 
 {
 	request.database = database;
+	request.environment = process.env;
+
 	next();
 });
 
@@ -72,9 +74,8 @@ app.use('/image-search', imageSearchRoute);
 // send 404 if no other route matched
 app.use((request, response) =>
 {
-	response.status(404).json({
-		message: 'Route Not Found'
-	});
+	response.status(404);
+	response.render('error/not-found');
 });
 
 // global error handler

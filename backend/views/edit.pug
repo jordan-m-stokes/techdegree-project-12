@@ -1,4 +1,4 @@
-extends layout.pug
+extends ./layouts/main.pug
 
 block content
 
@@ -8,7 +8,7 @@ block content
   .container.py-5
 
     include ./js/bootstrap
-    include ./submission-error
+    include ./error/submission-error
 
     header.text-center
       h1 Edit Post
@@ -41,7 +41,7 @@ block content
       p.mx-auto
         a.btn.btn-secondary.mt-2.pb-2.px-5(href='/posts') Cancel
 
-    include ./cover-photo/image-search
+    include ./plugins/image-search
 
   //- if(errors)
   //-   script(src="/static/scripts/input-handling.js")

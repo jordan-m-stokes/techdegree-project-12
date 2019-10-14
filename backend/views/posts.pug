@@ -1,4 +1,4 @@
-extends layout.pug
+extends ./layouts/main.pug
 
 block content
   header.text-center.my-5
@@ -10,7 +10,7 @@ block content
     .right.text-right
       p.d-inline-block.new-book.mt-2.mr-4
         a.button.bg-info.text-white(href='/posts/new') Create New Post
-      include ./logout.pug
+      include ./plugins/logout.pug
         
   div.content
     table.table.posts.mx-auto

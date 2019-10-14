@@ -3,8 +3,9 @@
 const Express = require('express');
 
 //middleware
-const getImage = require('../middleware/image-retrieval').get;
 const isLoggedIn = require('../middleware/session').isLoggedIn;
+const validatePost = require('../middleware/validate-post');
+const getImage = require('../middleware/image-retrieval').get;
 
 //fields
 const router = Express.Router();
@@ -112,7 +113,7 @@ router.post('/', isLoggedIn, getImage, (request, response, next) =>
 });
 
 //PUT update article
-router.post("/:id/update", isLoggedIn, getImage, (request, response, next) =>
+router.post("/:id/update", isLoggedIn, validatePost, getImage, (request, response, next) =>
 {
 	request.post.update(request.body, (error, result) => 
 	{
