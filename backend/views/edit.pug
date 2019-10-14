@@ -1,14 +1,13 @@
 extends ./layouts/main.pug
 
 block content
+  include ./js/bootstrap
+  include ./error/submission
 
   .cover-photo-background
     img(src="" alt="")
 
   .container.py-5
-
-    include ./js/bootstrap
-    include ./error/submission-error
 
     header.text-center
       h1 Edit Post
@@ -42,6 +41,7 @@ block content
         a.btn.btn-secondary.mt-2.pb-2.px-5(href='/posts') Cancel
 
     include ./plugins/image-search
+    include ./js/form-validation
 
   //- if(errors)
   //-   script(src="/static/scripts/input-handling.js")
