@@ -36,9 +36,11 @@ block content
       p.mx-auto
         a.btn.btn-secondary.btn-thick.mt-2(href='/posts') Cancel
 
-      -var post = {coverPhoto: { links: false} }
+      -var areLinks = false
+
+      -var post = { coverPhoto: { links: {larger: '', original: ''}}};
       
-  include ./plugins/image-search
+  include ./plugins/modal-image-search
   include ./js/form-validation
 
   //- if(errors)

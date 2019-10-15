@@ -14,19 +14,14 @@ class Feed extends Component
       
     componentDidMount()
     {
-        axios.get('http://localhost:5000/posts/json',
-              {
-                  headers: {
-
-                  }
-              })
+        axios.get('http://localhost:5000/posts/json')
          .then((response) =>
          {
             const posts = response.data;
 
-            const cards = posts.map((post) => 
+            const cards = posts.map((post, index) => 
             {
-                let card = <Card thumbnail={post.coverPhoto.links.large} title={post.title} lead={post.lead}/>;
+                let card = <Card id={index} thumbnail={post.coverPhoto.links.large} published={post.createdAt} title={post.title} lead={post.lead} key={post._id}/>;
                 return card;
             });
 
@@ -48,12 +43,23 @@ class Feed extends Component
       
     updateWindowDimensions()
     {
-        const feed = document.querySelector('.feed');
-        const cards = feed.querySelectorAll('.card');
         const spacePerCard = 360 /* px */
 
         let totalColumns = parseInt(window.innerWidth / spacePerCard * .95);
         let columns = document.querySelectorAll('.column');
+
+        if(totalColumns === columns.length || !document.querySelector('#card-0'))
+        {
+            return;
+        }
+        
+        const feed = document.querySelector('.feed');
+
+        let cards = [].slice.call(feed.querySelectorAll('.card'));
+        cards = cards.sort((a, b) => 
+        {
+            return parseInt(a.id.split('card-')[1]) - parseInt(b.id.split('card-')[1])
+        });
 
         if(totalColumns < 1) totalColumns = 1;
 

@@ -1,8 +1,12 @@
 extends ./layouts/main.pug
 
 block content
+  include ./error/submission
+  if(error)
+    include ./error/user-not-found.pug
+
   header.text-center.my-5
-    h1.my-5 Login
+    h1.pt-5.my-5 Login
         
     
     form.text-center(action="/login" method="post")    
@@ -14,3 +18,5 @@ block content
             input.mx-2.px-3.py-2(name='password' type='password')
         p.mx-auto
             input.btn.btn-info.mt-4(type='submit' value='Login')
+
+    include ./js/form-validation

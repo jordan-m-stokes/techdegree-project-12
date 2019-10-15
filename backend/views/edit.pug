@@ -39,9 +39,8 @@ block content
         input.btn.btn-danger.mt-2.px-5(type='submit' value='Delete Post')
       p.mx-auto
         a.btn.btn-secondary.mt-2.pb-2.px-5(href='/posts') Cancel
+    
+    -var areLinks = true
 
-    include ./plugins/image-search
+    include ./plugins/modal-image-search
     include ./js/form-validation
-
-  //- if(errors)
-  //-   script(src="/static/scripts/input-handling.js")

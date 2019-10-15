@@ -90,7 +90,24 @@ router.get('/new', isLoggedIn, (request, response, next) =>
 //GET individual book for edit
 router.get('/:id/edit', isLoggedIn, (request, response, next) => 
 {
-	response.locals.post = request.post;
+	const post = request.post;
+	const formattedPost =
+	{
+		id: post.id,
+		title: post.title,
+		author: post.author,
+		lead: post.lead,
+		coverPhoto: {
+			id: post.coverPhoto.id,
+			links: {
+				larger: post.coverPhoto.links.large,
+				original: post.coverPhoto.links.original
+			}
+		},
+		body: post.body
+	}
+
+	response.locals.post = formattedPost;
 	response.render('edit');
 });
 

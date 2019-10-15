@@ -15,6 +15,7 @@ router.get('/', (request, response) =>
 
 router.get('/login', (request, response) => 
 {
+	response.locals.error = request.query.authenticationFailed;
 	response.render('login');
 });
 
@@ -26,7 +27,7 @@ router.post('/login', (request, response, next) =>
         {
             if(error)
             {
-                next(error);
+				response.redirect('/login?authenticationFailed=true');
             }
             else
             {
@@ -37,7 +38,7 @@ router.post('/login', (request, response, next) =>
 	}
 	else
 	{
-		response.redirect('/login');
+		response.redirect('/login?authenticationFailed=true');
 	}
 });
 

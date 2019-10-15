@@ -12,7 +12,7 @@ const MongoStore = require('connect-mongo')(session);
 require('dotenv').config();
 
 //connect to mongoose
-mongoose.connect(process.env.DATABASE || 'mongodb://localhost:27017/clarity-spanish', { useNewUrlParser: true, useCreateIndex: true });
+mongoose.connect(process.env.DATABASE || 'mongodb://localhost:27017/clarity-spanish', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
 
 //fields
 const database = mongoose.connection;
@@ -81,12 +81,14 @@ app.use((request, response) =>
 // global error handler
 app.use((error, request, response, next) =>
 {
-	console.error(error.stack);
+	if(!error.status)
+	{
+		error.status = 500;
+	}
+	console.log(error);
 
-	response.status(error.status || 500).json({
-		message: error.message,
-		error: {}
-	});
+	response.locals.error = error;
+	response.render('./error/server-error');
 });
 
 // start listening on our port

@@ -28,7 +28,8 @@
     "frontend-sass": "sass --watch src/styles/sass:src/styles",
     "backend-app": "nodemon ./backend/app.js",
     "backend-sass": "sass --watch backend/sass:backend/public",
-    "add-author": "node ./backend/add-author.js",
+    "add-author": "node ./backend/db-scripts/add-author.js",
+    "remove-author": "node ./backend/db-scripts/remove-author.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

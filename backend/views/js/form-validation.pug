@@ -1,17 +1,12 @@
 script.   
     const form = document.querySelector('form');
-    let error = document.querySelector('.error');
+    let error = document.querySelector('.submission-error');
 
-    const fields = form.querySelectorAll('.post-fields input, .post-fields textarea');
+    const fields = form.querySelectorAll('input:not(.btn), textarea');
 
-    let fieldHasEventListener = 
-    [
-        false,
-        false,
-        false,
-        false,
-        false
-    ];
+    let fieldHasEventListener = [];
+
+    fields.forEach(field => fieldHasEventListener.push(false));
 
     form.addEventListener('submit', (event) => 
     {

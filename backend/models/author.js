@@ -40,10 +40,12 @@ AuthorSchema.statics.authenticate = function(request, callback)
                 error.status = 401;
                 return callback(error);
             }
+
             //if there is no error and author exists, the encrypted password provided is verified
             bcrypt.compare(request.body.password, author.password, (error, result) =>
             {
-                if(error || !author)
+                console.log(request.body.password, author.password);
+                if(error || !result || !author)
                 {
                     const error = new Error('Wrong email or password');
                     error.status = 401;

@@ -177,11 +177,15 @@ script.
         button.addEventListener('click', () => switchDatabase(button));
     });
 
-    let src = #{post.coverPhoto.links};
-
-    if(src)
+    if('#{areLinks}' === 'true')
     {
+        let src = 
+        {
+            larger: '#{post.coverPhoto.links.larger}',
+            original: '#{post.coverPhoto.links.original}'
+        }
         updateBackground(src);
     }
 
     realizeSearch();
+    

@@ -2,8 +2,10 @@
 
 const mongoose = require('mongoose');
 
+require('dotenv').config();
+
 //connect to mongoose
-mongoose.connect('mongodb://localhost:27017/clarity-spanish', { useNewUrlParser: true, useCreateIndex: true });
+mongoose.connect('mongodb://localhost:27017/clarity-spanish', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
 
 //fields
 const database = mongoose.connection;
@@ -23,12 +25,12 @@ database.once("open", () =>
 
 const newAuthor = 
 {
-    name: 'Jordan Stokes',
-    email: 'jordanstokes@clarityspanish.com',
-    password: 'beckyyee'
+    name: 'John Smith',
+    email: 'johnsmith@clarityspanish.com',
+    password: 'examplepass'
 }
 
-const Author = require('./models/author');
+const Author = require('../models/author');
 
 if(newAuthor.name && newAuthor.email && newAuthor.password)
 {
@@ -41,7 +43,7 @@ if(newAuthor.name && newAuthor.email && newAuthor.password)
         }
         else
         {
-            console.log(author);
+            console.log('Author created:\n\n', author);
         }
         database.close();
     });
