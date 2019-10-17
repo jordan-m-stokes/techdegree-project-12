@@ -1,5 +1,7 @@
 'use strict';
 
+//this script can be run by typing "npm run remove-author" and it's purpose if for removing the authors who can access this blogging administration site.
+
 const mongoose = require('mongoose');
 
 require('dotenv').config();

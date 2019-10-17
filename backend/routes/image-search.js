@@ -10,6 +10,7 @@ const isLoggedIn = require('../middleware/session').isLoggedIn;
 //fields
 const router = Express.Router();
 
+//handles a response from unsplash or pixels api
 function handleResponse(response, database)
 {
     if(database === 'unsplash')
@@ -25,6 +26,7 @@ function handleResponse(response, database)
             imageData = response.data;
         }
 
+        //data is formatted properly so the client can properly read it
         const jsonResponse = imageData.map(photo => 
         {
             return {
@@ -43,8 +45,10 @@ function handleResponse(response, database)
     {
         const imageData = response.data.photos;
 
+        //data is formatted properly so the client can properly read it
         const jsonResponse = imageData.map(photo => 
         {
+            //title is parsed from url
             let id = photo.url.split('-');
             id = id[id.length - 1].split('/')[0];
 
@@ -74,12 +78,15 @@ function handleResponse(response, database)
 
 }
 
+//default route for /image-search
+//sends the user currated photos if search query isn't provided
 router.get('/', isLoggedIn, (request, response, next) => 
 {
     const database = request.query.database;
 
     if(database === 'unsplash')
     {
+        //request for unsplash photos
         axios.get(`https://api.unsplash.com/photos?order_by=popular&page=1&per_page=12`,
                 {
                     headers: {
@@ -97,6 +104,7 @@ router.get('/', isLoggedIn, (request, response, next) =>
     }
     else
     {
+        //request for pexels photos
         axios.get(`https://api.pexels.com/v1/curated?per_page=12&page=1`,
                 {
                     headers: {
@@ -114,10 +122,12 @@ router.get('/', isLoggedIn, (request, response, next) =>
     }
 });
 
+//sends the user photos from either pexels.com or unsplash.com based on search query
 router.get('/:search', isLoggedIn, (request, response, next) => 
 {
     const database = request.query.database;
 
+    //request for unsplash photos
     if(database === 'unsplash')
     {
         axios.get(`https://api.unsplash.com/search/photos?query=${request.params.search}&page=1&per_page=12`,
@@ -135,6 +145,7 @@ router.get('/:search', isLoggedIn, (request, response, next) =>
                 next(error);
             });
     }
+    //request for pexels photos
     else
     {
         axios.get(`https://api.pexels.com/v1/search?query=${request.params.search}&per_page=12&page=1`,

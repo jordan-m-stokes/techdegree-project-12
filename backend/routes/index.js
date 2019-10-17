@@ -7,18 +7,20 @@ const router = Express.Router();
 
 const Author = require('../models/author');
 
-//index route handler
+//redirects home route to /posts
 router.get('/', (request, response) => 
 {
   	response.redirect('/posts');
 });
 
+//a login route that is redirected to if the user isn't logged in
 router.get('/login', (request, response) => 
 {
 	response.locals.error = request.query.authenticationFailed;
 	response.render('login');
 });
 
+//post route for authenticating user trying to log in
 router.post('/login', (request, response, next) => 
 {
 	if(request.body.email && request.body.password)
@@ -42,6 +44,7 @@ router.post('/login', (request, response, next) =>
 	}
 });
 
+//route for logging out user
 router.get('/logout', (request, response, next) => 
 {
 	if(request.session)

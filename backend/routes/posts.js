@@ -37,6 +37,7 @@ router.param("id", (request, response, next, id) =>
 		});
 });
 
+//route for displaying all posts in database
 router.get('/', isLoggedIn, (request, response, next) => 
 {
 	Post.find({})
@@ -60,6 +61,9 @@ router.get('/', isLoggedIn, (request, response, next) =>
 		});
 });
 
+
+//route that sends all posts in database in json format, used for actual blogging site to communicate with
+//the database
 router.get('/json', (request, response) =>
 {
 	Post.find({})
@@ -75,19 +79,13 @@ router.get('/json', (request, response) =>
 		});
 });
 
-// //GET all posts on a page
-// router.get('/page/:page', (request, response, next) => 
-// {
-// 	response.render('posts');
-// });
-
-//GET new book form
+//route for creating a new post
 router.get('/new', isLoggedIn, (request, response, next) => 
 {	
 	response.render('new');
 });
 
-//GET individual book for edit
+//route for editing a published post
 router.get('/:id/edit', isLoggedIn, (request, response, next) => 
 {
 	const post = request.post;
@@ -111,7 +109,7 @@ router.get('/:id/edit', isLoggedIn, (request, response, next) =>
 	response.render('edit');
 });
 
-// POST create post
+// a post route for saving new post to database
 router.post('/', isLoggedIn, getImage, (request, response, next) =>
 {
 	const post = new Post(request.body);
@@ -129,7 +127,7 @@ router.post('/', isLoggedIn, getImage, (request, response, next) =>
 	});
 });
 
-//PUT update article
+// a post route for updating a post in the database
 router.post("/:id/update", isLoggedIn, validatePost, getImage, (request, response, next) =>
 {
 	request.post.update(request.body, (error, result) => 
@@ -144,7 +142,7 @@ router.post("/:id/update", isLoggedIn, validatePost, getImage, (request, respons
 	});
 });
 
-/* POST delete article. */
+// a post route for deleting a post in the database
 router.post("/:id/delete", isLoggedIn, (request, response, next) =>
 {
 	request.post.remove((error) => 

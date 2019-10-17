@@ -1,3 +1,6 @@
+
+//this script can be run by typing "npm run add-author" and it's purpose if for adding new authors who can access this blogging administration site.
+
 'use strict';
 
 const mongoose = require('mongoose');

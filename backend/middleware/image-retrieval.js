@@ -1,6 +1,7 @@
 const axios = require('axios');
 const toTitleCase = require('@gouch/to-title-case');
 
+//retrieves image from pexels and prepares data to store in database
 function getPexelImage(request, response, next)
 {
     axios.get(`https://api.pexels.com/v1/photos/${request.body.coverPhoto}`,
@@ -13,6 +14,7 @@ function getPexelImage(request, response, next)
          {
             const imageData = pexelsResponse.data;
             
+            //title is parsed from url
             let title = imageData.url.split('/')[4];
             title = title.replace(`-${request.body.coverPhoto}`, '');
 
@@ -48,6 +50,7 @@ function getPexelImage(request, response, next)
          });
 }
 
+//retrieves image from unsplash and prepares data to store in database
 function getUnsplashImage(request, response, next)
 {
     axios.get(`https://api.unsplash.com/photos/${request.body.coverPhoto}`,
@@ -87,6 +90,7 @@ function getUnsplashImage(request, response, next)
          });
 }
 
+//determines if cover photo id is an unsplash or pexel id and makes a request to the corresponding api
 function get(request, response, next)
 {
     if(isNaN(request.body.coverPhoto))

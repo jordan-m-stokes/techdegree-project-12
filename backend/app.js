@@ -57,6 +57,7 @@ app.use(session({
 //my middleware
 app.use((request, response, next) => 
 {
+	//makes accesible database and environment variables to entire program.
 	request.database = database;
 	request.environment = process.env;
 

@@ -15,6 +15,7 @@ const months =
     12: "December"
 }
 
+//converts military to standard time
 function convertMilitary(hours, minutes)
 {
     const morning = hours < 12;
@@ -36,6 +37,8 @@ function convertMilitary(hours, minutes)
     return `${hours}:${minutes} ${morning ? 'AM' : 'PM'}`;
 }
 
+
+//formats date provided in database to something more user friendly
 function formatToString(date)
 {
     let string = "";
