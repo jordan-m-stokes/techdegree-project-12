@@ -20,5 +20,6 @@ This app is a MERN-stack application. It has a back-end, Express server and fron
 	API_KEY_PEXELS=...
 	API_KEY_UNSPLASH=...
 	```
+* Backend requires a username and password to manage posts. In order to create a user, navigate to `/backend/db-scripts/add-author.js` and edit `newAuthor` object to choose a name, password, and email to add. IN ORDER TO ACTUALLY ADD USER, run the script `npm run add-author`. The purpose of this complex process is to ensure that nobody can hack their way onto the site except by directly editting this `.js` file.
 * This project uses [Concurrently](https://www.npmjs.com/package/concurrently) as a dependency to run front and backend, so simply type `npm start` to run front and backend
 * That's it! Backend by default will be at `http://localhost:5000` and frontend at `http://localhost:3000`
