@@ -1,7 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Info
-This app is a MERN-stack application. It has a back-end, Express server and front-end, React server. It's purpose is to serve as a blogging site. The back-end is used to publish, edit and delete blog posts, and the front-end is for viewing them. To create a post, on the back-end simply click "Create New Post," fill out form, search for a cover photo from Pexels or Unsplash with builtin search engine, and submit it. After that, the post can be viewed on the front-end.
+This app is a MERN-stack application. It has a back-end, Express server and front-end, React server. It's purpose is to serve as a blogging site. The back-end is used to publish, edit and delete blog posts, and the front-end is for viewing them. To create a post, on the back-end, simply click "Create New Post," fill out form, search for a cover photo from Pexels or Unsplash with builtin search engine, and submit it. After that, the post can be viewed on the front-end.
 
 ## Prerequisites
 
