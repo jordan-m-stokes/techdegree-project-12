@@ -23,7 +23,8 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
-    "sass": "^1.22.12"
+    "sass": "^1.22.12",
+    "webpack": "4.29.6"
   },
   "scripts": {
     "frontend-app": "react-scripts start",

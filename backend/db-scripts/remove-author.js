@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 //connect to mongoose
-mongoose.connect('mongodb://localhost:27017/clarity-spanish', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/clarity-spanish', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
 
 //fields
 const database = mongoose.connection;

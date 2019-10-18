@@ -13,8 +13,6 @@ import Footer from './components/Footer';
 
 class App extends Component
 {
-
-
 	render()
 	{
 		return (
@@ -23,7 +21,7 @@ class App extends Component
 					<Route path="/" component={Header}/>
 					<Route path="/" component={TopGradient}/>
 					<Switch>
-						<Route exact path="/" component={Feed}/>
+						<Route exact path="/" component={() => <Feed />}/>
 					</Switch>
 					<Route path="/" component={Footer}/>
 				</div>

@@ -12,7 +12,7 @@ const MongoStore = require('connect-mongo')(session);
 require('dotenv').config();
 
 //connect to mongoose
-mongoose.connect(process.env.DATABASE || 'mongodb://localhost:27017/clarity-spanish', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/clarity-spanish', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
 
 //fields
 const database = mongoose.connection;
@@ -60,6 +60,7 @@ app.use((request, response, next) =>
 	//makes accesible database and environment variables to entire program.
 	request.database = database;
 	request.environment = process.env;
+	request.adminUrl = process.env.ADMIN_URL || 'http://localhost:5000';
 
 	next();
 });

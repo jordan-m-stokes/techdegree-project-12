@@ -9,12 +9,16 @@ class Feed extends Component
     constructor(props)
     {
         super(props);
-        this.state = { width: 0, height: 0, cards: [] };
+
+        let adminUrl = process.env.REACT_APP_ADMIN_URL;
+        adminUrl = (adminUrl) ? (adminUrl) : 'http://localhost:5000';
+
+        this.state = { width: 0, height: 0, cards: [], adminUrl: adminUrl };
     }
       
     componentDidMount()
     {
-        axios.get('http://localhost:5000/posts/json')
+        axios.get(`${this.state.adminUrl}/posts/json`)
          .then((response) =>
          {
             const posts = response.data;

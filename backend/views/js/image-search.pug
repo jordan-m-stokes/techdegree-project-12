@@ -30,7 +30,7 @@ script.
 
         axios({
             method: 'get',
-            url: `http://localhost:5000/image-search/${query}?database=${database}`,
+            url: `#{adminUrl}/image-search/${query}?database=${database}`,
             })
             .then(function (response)
             {

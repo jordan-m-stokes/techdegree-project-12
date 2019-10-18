@@ -82,6 +82,7 @@ router.get('/json', (request, response) =>
 //route for creating a new post
 router.get('/new', isLoggedIn, (request, response, next) => 
 {	
+	response.locals.adminUrl = request.adminUrl;
 	response.render('new');
 });
 
@@ -105,6 +106,7 @@ router.get('/:id/edit', isLoggedIn, (request, response, next) =>
 		body: post.body
 	}
 
+	response.locals.adminUrl = request.adminUrl;
 	response.locals.post = formattedPost;
 	response.render('edit');
 });
